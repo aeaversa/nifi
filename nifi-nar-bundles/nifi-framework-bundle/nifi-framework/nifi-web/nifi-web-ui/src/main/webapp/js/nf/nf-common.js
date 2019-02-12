@@ -1700,6 +1700,19 @@
                 return option.value === value;
             });
             return nfCommon.isDefinedAndNotNull(matchedOption) ? matchedOption.text : undefined;
+        },
+
+        /**
+         * Find the corresponding value of the object key passed
+         *
+         * @param {object} obj        The obj to search
+         * @param {string} key        The key path to return
+         * @returns {object/literal}  The value of the key passed or undefined/null
+         */
+        getKeyValue : function(obj,key){
+            return key.split('.').reduce(function(o,x){
+                return(typeof o === undefined || o === null)? o : (typeof o[x] == 'function')?o[x]():o[x];
+            }, obj);
         }
 
     };
